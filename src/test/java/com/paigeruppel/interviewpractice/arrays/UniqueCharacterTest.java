@@ -20,4 +20,22 @@ public class UniqueCharacterTest {
 		String s = "abacabad";
 		assertThat(underTest.firstNotRepeatingCharacter(s), is('c'));
 	}
+	
+	@Test
+	public void shouldReturnNoneTestCase2() {
+		String s = "abacabaabacaba";
+		assertThat(underTest.firstNotRepeatingCharacter(s), is('_'));
+	}
+	
+	@Test
+	public void shouldReturnZTestCase3() {
+		String s = "z";
+		assertThat(underTest.firstNotRepeatingCharacter(s), is('z'));
+	}
+	
+	@Test
+	public void shouldReturnCTestCase4() {
+		String s = "bcb";
+		assertThat(underTest.firstNotRepeatingCharacter(s), is('c'));
+	}
 }
