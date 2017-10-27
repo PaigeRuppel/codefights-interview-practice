@@ -17,29 +17,13 @@ public class UniqueCharacter {
 	 */
 
 	public char firstNotRepeatingCharacter(String s) {
-		Set<Character> repeating = new HashSet<>();
-		List<Character> notRepeating = new ArrayList<>();
-		char firstUnique = '_';
-		char[] sArray = s.toCharArray();
-		
-		for(int i = 0; i < sArray.length; i++) {
-			char letter = sArray[i];
-			if (repeating.contains(letter)) {
-				continue;
-			}
-			if (notRepeating.contains(letter)) {
-				notRepeating.remove((Character) letter);
-				repeating.add(letter);
-			} else {
-				notRepeating.add(letter);
-			}
+		char[] letters = s.toCharArray();
+		char unique = '_';
+		for (int i = 0; i < s.length() && unique == '_'; i++) {
+			if (s.indexOf(letters[i]) == s.lastIndexOf(letters[i]))
+				unique = letters[i];
 		}
-		
-		if (notRepeating.size() != 0) {
-			firstUnique = notRepeating.get(0);
-		}
-		
-		return firstUnique;
+		return unique;
 	}
 
 }
