@@ -9,18 +9,16 @@ public class Rotation {
 	 * You are given an n x n 2D matrix that represents an image. Rotate the image
 	 * by 90 degrees (clockwise).
 	 */
+	
 	public int[][] rotateImage(int[][] a) {
+		int maxInd = a.length - 1;
 		int[][] rotated = new int[a.length][a.length];
-		for (int row = 0, invRow = a.length - 1; row < a.length; row++, invRow--) {
-			for (int col = 0; col < a[0].length; col++) {
-				//newRow == col
-				int newRow = col;
-				
-				//newCol == reverse of row(count from max...)
-				int newCol = invRow;
-
-				rotated[newRow][newCol] = a[row][col];
 		
+		for (int row = 0; row < a.length; row++) {
+			for (int col = 0; col < a[0].length; col++) {
+				int newRow = col;
+				int newCol = maxInd - row;
+				rotated[newRow][newCol] = a[row][col];
 			}
 		}
 
