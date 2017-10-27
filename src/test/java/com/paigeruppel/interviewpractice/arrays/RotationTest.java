@@ -17,8 +17,19 @@ public class RotationTest {
 
 	@Test
 	public void shouldReturnRotated3By3ArrayTestCase1() {
-		int[][] a = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-		int[][] rotated = { { 7, 4, 1 }, { 8, 5, 2 }, { 9, 6, 3 } };
+		int[][] a = { { 1, 2, 3 }, 
+					  { 4, 5, 6 }, 
+					  { 7, 8, 9 } };
+		int[][] rotated = { { 7, 4, 1 }, 
+							{ 8, 5, 2 }, 
+							{ 9, 6, 3 } };
+		assertThat(underTest.rotateImage(a), is(rotated));
+	}
+	
+	@Test
+	public void shouldReturnSameArrayFor1By1ArrayTestCase2() {
+		int[][] a = { { 1 } };
+		int[][] rotated = { { 1 } };
 		assertThat(underTest.rotateImage(a), is(rotated));
 	}
 
