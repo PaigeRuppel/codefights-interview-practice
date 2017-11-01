@@ -6,22 +6,29 @@ import java.util.Set;
 public class SudokuSolve {
 
 	public boolean sudoku2(String[][] grid) {
-		return isValidHorizontal(grid);
+		return isValidHorizontalAndVertical(grid);
 	}
 	
-	private boolean isValidHorizontal(String[][] grid) {
-		Set<String> present = new HashSet<>();
-		for (int row = 0; row < grid.length; row++) {
-			for (int col = 0; col < grid.length; col++) {
-				String horClue = grid[row][col];
-				if (present.contains(horClue)) {
+	private boolean isValidHorizontalAndVertical(String[][] grid) {
+		Set<String> horPresent = new HashSet<>();
+		Set<String> verPresent = new HashSet<>();
+		
+		for (int coord1 = 0; coord1 < grid.length; coord1++) {
+			for (int coord2 = 0; coord2 < grid.length; coord2++) {
+				String horClue = grid[coord1][coord2];
+				String verClue = grid[coord2][coord1];
+				if (horPresent.contains(horClue) || verPresent.contains(verClue)) {
 					return false;
 				}
-				if (!horClue.equals(".") && !present.contains(horClue)) {
-					present.add(horClue);
+				if (!horClue.equals(".") && !horPresent.contains(horClue)) {
+					horPresent.add(horClue);
+				}
+				if (!verClue.equals(".") && !verPresent.contains(verClue)) {
+					verPresent.add(verClue);
 				}
 			}
-			present.clear();
+			horPresent.clear();
+			verPresent.clear();
 		}
 		return true;
 	}
