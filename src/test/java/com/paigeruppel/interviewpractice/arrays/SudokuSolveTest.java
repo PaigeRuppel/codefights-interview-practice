@@ -1,5 +1,6 @@
 package com.paigeruppel.interviewpractice.arrays;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -26,5 +27,19 @@ public class SudokuSolveTest {
 				{".",".",".",".",".","7",".",".","."}, 
 				{".",".",".","5",".",".",".","7","."}};
 		assertTrue(underTest.sudoku2(grid));
+	}
+	
+	@Test
+	public void horizontalConflictShouldReturnFalseTestCase2() {
+		String[][] grid = {{".",".",".",".","2",".",".","9","."}, 
+				{".",".",".",".","6",".",".",".","."}, 
+				{"7","1",".",".","7","5",".",".","."}, 
+				{".","7",".",".",".",".",".",".","."}, 
+				{".",".",".",".","8","3",".",".","."}, 
+				{".",".","8",".",".","7",".","6","."}, 
+				{".",".",".",".",".","2",".",".","."}, 
+				{".","1",".","2",".",".",".",".","."}, 
+				{".","2",".",".","3",".",".",".","."}};
+		assertFalse(underTest.sudoku2(grid));
 	}
 }
