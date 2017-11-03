@@ -10,24 +10,25 @@ public class SudokuSolve {
 	}
 
 	private boolean isValidHorizontalAndVertical(String[][] grid) {
-		Set<String> horPresent = new HashSet<>();
-		Set<String> verPresent = new HashSet<>();
+		Set<String> rowSet = new HashSet<>();
+		Set<String> colSet = new HashSet<>();
 		for (int coord1 = 0; coord1 < grid.length; coord1++) {
 			for (int coord2 = 0; coord2 < grid.length; coord2++) {
-				String horClue = grid[coord1][coord2];
-				String verClue = grid[coord2][coord1];
-				if (horPresent.contains(horClue) || verPresent.contains(verClue)) {
+				String rowClue = grid[coord1][coord2];
+				String colClue = grid[coord2][coord1];
+				if (isNotBlank(rowClue) && rowSet.contains(rowClue)
+						|| isNotBlank(colClue) && colSet.contains(colClue)) {
 					return false;
 				}
-				if (!horClue.equals(".") && !horPresent.contains(horClue)) {
-					horPresent.add(horClue);
+				if (!rowSet.contains(rowClue)) {
+					rowSet.add(rowClue);
 				}
-				if (!verClue.equals(".") && !verPresent.contains(verClue)) {
-					verPresent.add(verClue);
+				if (!colSet.contains(colClue)) {
+					colSet.add(colClue);
 				}
 			}
-			horPresent.clear();
-			verPresent.clear();
+			rowSet.clear();
+			colSet.clear();
 		}
 		return true;
 	}
@@ -37,23 +38,25 @@ public class SudokuSolve {
 		int colStart = 0;
 		while (colStart < 7) {
 			for (int row = 0; row < grid.length; row++) {
-				if (row == 3 || row == 6) {
+				if (row == 0 || row == 3 || row == 6) {
 					present.clear();
 				}
 				for (int col = colStart; col < colStart + 3; col++) {
 					String clue = grid[row][col];
-					if (present.contains(clue)) {
+					if (isNotBlank(clue) && present.contains(clue)) {
 						return false;
 					}
-					if (!clue.equals(".") && !present.contains(clue)) {
+					if (!present.contains(clue)) {
 						present.add(clue);
 					}
 				}
 			}
-			present.clear();
 			colStart += 3;
 		}
 		return true;
 	}
 
+	private boolean isNotBlank(String horClue) {
+		return !horClue.equals(".");
+	}
 }
