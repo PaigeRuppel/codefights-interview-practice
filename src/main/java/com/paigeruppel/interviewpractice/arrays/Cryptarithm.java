@@ -27,7 +27,9 @@ public class Cryptarithm {
 			}
 			Integer value = Integer.parseInt(entry);
 			arithmetic.add(s, value);
-			firstDigits.add(entry.charAt(0));
+			if (entry.length() > 1) {
+				firstDigits.add(entry.charAt(0));
+			}
 		}
 		
 		return !hasLeadingZeroes(firstDigits) && isValidExpression(arithmetic);

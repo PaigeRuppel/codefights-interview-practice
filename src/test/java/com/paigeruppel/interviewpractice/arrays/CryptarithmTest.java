@@ -27,6 +27,19 @@ public class CryptarithmTest {
 		String[] crypt = { "TEN", "TWO", "ONE" };
 		char[][] solution = { { 'O', '1' }, { 'T', '0' }, { 'W', '9' }, { 'E', '5' }, { 'N', '4' } };
 		assertFalse(underTest.isCryptSolution(crypt, solution));
+	}
 
+	@Test
+	public void shouldReturnTrueTestCase3() {
+		String[] crypt = { "ONE", "ONE", "TWO" };
+		char[][] solution = { { 'O', '2' }, { 'T', '4' }, { 'W', '6' }, { 'E', '1' }, { 'N', '3' } };
+		assertTrue(underTest.isCryptSolution(crypt, solution));
+	}
+
+	@Test
+	public void shouldReturnTrueForAllZeroesTestCase5() {
+		String[] crypt = { "A", "A", "A" };
+		char[][] solution = { { 'A', '0' } };
+		assertTrue(underTest.isCryptSolution(crypt, solution));
 	}
 }
