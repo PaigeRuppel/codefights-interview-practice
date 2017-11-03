@@ -37,10 +37,10 @@ public class SudokuSolve {
 		int colStart = 0;
 		while (colStart < 7) {
 			for (int row = 0; row < grid.length; row++) {
+				if (row == 3 || row == 6) {
+					present.clear();
+				}
 				for (int col = colStart; col < colStart + 3; col++) {
-					if (row == 3 || row == 6) {
-						present.clear();
-					}
 					String clue = grid[row][col];
 					if (present.contains(clue)) {
 						return false;
