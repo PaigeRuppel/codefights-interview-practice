@@ -25,7 +25,7 @@ public class Cryptarithm {
 				entry += "" + value;
 			}
 			Double value = Double.parseDouble(entry);
-			arithmetic.add(s, value);
+			arithmetic.add(value);
 		}
 		
 		return isValidExpression(arithmetic);
@@ -48,9 +48,23 @@ public class Cryptarithm {
 		return first + second == sum;
 	}
 
-	private boolean hasLeadingZeroes(List<Double> arithmetic) {
-		
-		return arithmetic.contains('0');
-	}
+	// check for presence of decimals
+	// check for length of numbers beginning with zero
+	// check for numbers beginning with zero
+//	private boolean hasLeadingZeroes(List<Double> arithmetic) {
+//		List<Character> firstDigits = new ArrayList<>();
+//		for (int d = 0; d < arithmetic.size(); d++) {
+//			String s = "" + arithmetic.get(d);
+//			for (int i = 1; i < s.length(); i++) {
+//				if (s.charAt(i) == '.') {
+//					return false;
+//				}
+//			}
+//			if (s.charAt(0) == '0') {
+//				firstDigits.add(s.charAt(0));
+//			}
+//		}
+//		return firstDigits.size() > 0;
+//	}
 
 }
