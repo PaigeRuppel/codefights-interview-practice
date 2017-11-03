@@ -42,4 +42,11 @@ public class CryptarithmTest {
 		char[][] solution = { { 'A', '0' } };
 		assertTrue(underTest.isCryptSolution(crypt, solution));
 	}
+
+	@Test
+	public void shouldReturnTrueForAllZeroesWithDecimalsTestCase5() {
+		String[] crypt = { "ABA", "ABA", "ABA" };
+		char[][] solution = { { 'A', '0' }, { 'B', '.' } };
+		assertTrue(underTest.isCryptSolution(crypt, solution));
+	}
 }

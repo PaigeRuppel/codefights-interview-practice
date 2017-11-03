@@ -14,44 +14,43 @@ public class Cryptarithm {
 	 */
 
 	public boolean isCryptSolution(String[] crypt, char[][] solution) {
-		Map<Character, Integer> solutionPairs = convertSolutionToMap(solution);
-		List<Integer> arithmetic = new ArrayList<>();
-		List<Character> firstDigits = new ArrayList<>();
+		Map<Character, String> solutionPairs = convertSolutionToMap(solution);
+		List<Double> arithmetic = new ArrayList<>();
 
 		for (int s = 0; s < crypt.length; s++) {
 			String current = crypt[s];
 			String entry = "";
 			for (int i = 0; i < current.length(); i++) {
-				int value = solutionPairs.get(current.charAt(i));
+				String value = solutionPairs.get(current.charAt(i));
 				entry += "" + value;
 			}
-			Integer value = Integer.parseInt(entry);
+			Double value = Double.parseDouble(entry);
 			arithmetic.add(s, value);
-			if (entry.length() > 1) {
-				firstDigits.add(entry.charAt(0));
-			}
 		}
 		
-		return !hasLeadingZeroes(firstDigits) && isValidExpression(arithmetic);
+		return isValidExpression(arithmetic);
 	}
 
-	private Map<Character, Integer> convertSolutionToMap(char[][] solution) {
-		Map<Character, Integer> pairs = new HashMap<>();
+	private Map<Character, String> convertSolutionToMap(char[][] solution) {
+		Map<Character, String> pairs = new HashMap<>();
 		for (int i = 0; i < solution.length; i++) {
 			Character c = solution[i][0];
 			String s = "" + solution[i][1];
-			Integer v = Integer.parseInt(s);
-			pairs.put(c, v);
+			pairs.put(c, s);
 		}
 		return pairs;
 	}
 
-	private boolean isValidExpression(List<Integer> arithmetic) {
-		return arithmetic.get(0) + arithmetic.get(1) == arithmetic.get(2);
+	private boolean isValidExpression(List<Double> arithmetic) {
+		double first = arithmetic.get(0);
+		double second = arithmetic.get(1);
+		double sum = arithmetic.get(2);
+		return first + second == sum;
 	}
 
-	private boolean hasLeadingZeroes(List<Character> firstDigits) {
-		return firstDigits.contains('0');
+	private boolean hasLeadingZeroes(List<Double> arithmetic) {
+		
+		return arithmetic.contains('0');
 	}
 
 }
