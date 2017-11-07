@@ -12,36 +12,31 @@ import java.util.Set;
 public class RecipeBook {
 
 	public String[][] groupingDishes(String[][] dishes) {
-		Set<String> uniqueIngredients = new HashSet<>();
+		Set<String> allIngredients = new HashSet<>();
 		List<String> repeatIngredients = new ArrayList<>();
-		List<String> temp = new ArrayList<>();
-
 		for (int dish = 0; dish < dishes.length; dish++) {
 			for (int ingredient = 1; ingredient < dishes[dish].length; ingredient++) {
 				String currentIngredient = dishes[dish][ingredient];
-				if (uniqueIngredients.contains(currentIngredient) && !repeatIngredients.contains(currentIngredient)) {
+				if (allIngredients.contains(currentIngredient) && !repeatIngredients.contains(currentIngredient)) {
 					repeatIngredients.add(currentIngredient);
-					temp.add(currentIngredient);
 				}
-				uniqueIngredients.add(currentIngredient);
+				allIngredients.add(currentIngredient);
 			}
 		}
-
+		
 		Collections.sort(repeatIngredients);
-		Collections.sort(temp);
-
-		Map<String, String> ingredientsMap = new HashMap<>();
+		Map<String, String> ingredientMap = new HashMap<>();
 		for (int dish = 0; dish < dishes.length; dish++) {
 			for (int ingredient = 1; ingredient < dishes[dish].length; ingredient++) {
 				String currentDish = dishes[dish][0];
 				String currentIngredient = dishes[dish][ingredient];
 				if (repeatIngredients.contains(currentIngredient)) {
-					if (ingredientsMap.containsKey(currentIngredient)) {
-						String currentValue = ingredientsMap.get(currentIngredient);
+					if (ingredientMap.containsKey(currentIngredient)) {
+						String currentValue = ingredientMap.get(currentIngredient);
 						String newValue = currentValue + "," + currentDish;
-						ingredientsMap.put(currentIngredient, newValue);
+						ingredientMap.put(currentIngredient, newValue);
 					} else {
-						ingredientsMap.put(currentIngredient, currentDish);
+						ingredientMap.put(currentIngredient, currentDish);
 					}
 				}
 			}
@@ -49,17 +44,17 @@ public class RecipeBook {
 
 		String[][] sorted = new String[repeatIngredients.size()][];
 		for (int i = 0; i < repeatIngredients.size(); i++) {
-			String value = ingredientsMap.get(repeatIngredients.get(i));
-			String[] entry = value.split(",");
-			Arrays.sort(entry);
-			String[] complete = new String[entry.length + 1];
-			complete[0] = repeatIngredients.get(i);
+			String ingredient = repeatIngredients.get(i);
+			String value = ingredientMap.get(ingredient);
+			String[] recipes = value.split(",");
+			Arrays.sort(recipes);
+			String[] complete = new String[recipes.length + 1];
+			complete[0] = ingredient;
 			for (int j = 1; j < complete.length; j++) {
-				complete[j] = entry[j - 1];
+				complete[j] = recipes[j - 1];
 			}
 			sorted[i] = complete;
 		}
 		return sorted;
 	}
-
 }
