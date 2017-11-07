@@ -16,7 +16,7 @@ public class RecipeBook {
 		for (int dish = 0; dish < dishes.length; dish++) {
 			for (int ingredient = 1; ingredient < dishes[dish].length; ingredient++) {
 				String currentIngredient = dishes[dish][ingredient];
-				if (uniqueIngredients.contains(currentIngredient)) {
+				if (uniqueIngredients.contains(currentIngredient) && !repeatIngredients.contains(currentIngredient)) {
 					repeatIngredients.add(currentIngredient);
 					temp.add(currentIngredient);
 				}
@@ -41,13 +41,10 @@ public class RecipeBook {
 			}
 		}
 
-		String[][] sorted = new String[8][8];
+		String[][] sorted = new String[repeatIngredients.size()][];
 		for (int i = 0 ; i < temp.size(); i ++) {
 			String[] entry = temp.get(i).split(",");
-			
-			if (entry.length > 1) {
 			sorted[i] = entry;
-			}
 		}
 		
 		return sorted;
