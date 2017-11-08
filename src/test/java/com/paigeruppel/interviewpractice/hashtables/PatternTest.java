@@ -27,4 +27,13 @@ public class PatternTest {
 		String[] patterns = { "a", "b", "b" };
 		assertFalse(underTest.areFollowingPatterns(strings, patterns));
 	}
+	
+	@Test
+	public void shouldReturnFalseTestCase3() {
+		String[] strings = { "cat", "dog", "dog" };
+		String[] patterns = { "a", "b", "c" };
+		assertFalse(underTest.areFollowingPatterns(strings, patterns));
+	}
+	
+	
 }
