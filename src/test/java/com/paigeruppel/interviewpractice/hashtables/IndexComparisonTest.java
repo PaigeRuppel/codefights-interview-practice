@@ -20,4 +20,11 @@ public class IndexComparisonTest {
 		int k = 3;
 		assertTrue(underTest.containsCloseNums(nums, k));
 	}
+	
+	@Test
+	public void shouldReturnFalseTestCase2() {
+		int[] nums = { 0, 1, 2, 3, 5, 2};
+		int k = 2;
+		assertFalse(underTest.containsCloseNums(nums, k));
+	}
 }
