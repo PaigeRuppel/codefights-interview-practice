@@ -10,27 +10,25 @@ public class CoinOrganizer {
 	public int possibleSums(int[] coins, int[] quantities) {
 		Set<Integer> sums = new HashSet<>();
 		List<Integer> rawSums = new ArrayList<>();
-		int totalQuantity = 0;
-		for (int q : quantities) {
-			totalQuantity += q;
+
+		List<Integer> availableCoins = new ArrayList<>();
+		for (int i = 0; i < coins.length; i++) {
+			int coin = coins[i];
+			int quantity = quantities[i];
+			int q = 1;
+			do {
+				availableCoins.add(coin);
+				sums.add(coin);
+				q++;
+			} while (q <= quantity);
+		}
+		
+		for (int i = 0; i < availableCoins.size() - 1; i++) {
+			for (int j = i + 1; j < availableCoins.size(); j++) {
+				sums.add(availableCoins.get(i) + availableCoins.get(j));
+			}
 		}
 
-		int[] possibleCoins = new int[totalQuantity];
-		int count = 0;
-		 for (int i = 0; i < coins.length; i++) {
-		 
-		 int coin = coins[i];
-		 int quantity = quantities[i];
-		 int q = 1;
-		 do {
-		 int sum = coin*q;
-		 sums.add(sum);
-		 rawSums.add(sum);
-		 possibleCoins[count] = coin;
-		 count++;
-		 q++;
-		 } while (q <= quantity);
-		 }
 		//
 		// for (int i = 0; i < coins.length; i++) {
 		// for (int j = i + 1; j < coins.length + 1; j++) {
@@ -49,7 +47,7 @@ public class CoinOrganizer {
 		// }
 		// }
 
-		return possibleCoins.length;
+		return sums.size();
 	}
 
 }
