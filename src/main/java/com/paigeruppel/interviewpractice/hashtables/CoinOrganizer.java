@@ -28,19 +28,17 @@ public class CoinOrganizer {
 
 	private Set<Integer> buildPossibleSums(int index, List<Integer> availableCoins, Set<Integer> sums) {
 		int increment = index;
-		while (increment > 0) {
-			for (int i = 0; i < availableCoins.size(); i++) {
-				int coin1 = availableCoins.get(i);
-				int temp = coin1;
-				for (int j = i + increment; j < availableCoins.size() && j > 0; j--) {
-					int coin2 = availableCoins.get(j);
-					temp += coin2;
-					sums.add(coin1 + coin2);
-					sums.add(temp);
-				}
+		for (int i = 0; i < availableCoins.size(); i++) {
+			int coin1 = availableCoins.get(i);
+			int temp = coin1;
+			for (int j = i + increment; j < availableCoins.size() && j > 0; j--) {
+				int coin2 = availableCoins.get(j);
+				temp += coin2;
+				sums.add(coin1 + coin2);
+				sums.add(temp);
 			}
-			increment--;
 		}
+
 		if (index != 0) {
 			index -= 1;
 			buildPossibleSums(index, availableCoins, sums);

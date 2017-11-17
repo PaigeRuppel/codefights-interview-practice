@@ -27,6 +27,12 @@ public class CoinOrganizerTest {
 		int[] coins = { 10, 50, 100, 500 };
 		int[] quantities = { 5, 3, 2, 2 };
 		assertThat(underTest.possibleSums(coins, quantities), is(122));
+	}
 
+	@Test
+	public void testCase3() {
+		int[] coins = { 1 };
+		int[] quantities = { 5 };
+		assertThat(underTest.possibleSums(coins, quantities), is(5));
 	}
 }
