@@ -20,20 +20,20 @@ public class PatternDetectionTest {
 	public void testCase1() {
 		String s = "CodefightsIsAwesome";
 		String x = "IA";
-		assertThat(underTest.findFirstSubstringOccurence(s, x), is(-1));
+		assertThat(underTest.findFirstSubstringOccurrence(s, x), is(-1));
 	}
 	
 	@Test
 	public void testCase2() {
 		String s = "CodefightsIsAwesome";
 		String x = "IsA";
-		assertThat(underTest.findFirstSubstringOccurence(s, x), is(10));
+		assertThat(underTest.findFirstSubstringOccurrence(s, x), is(10));
 	}
 	
 	@Test
 	public void testCase3() {
 		String s = "a";
 		String x = "a";
-		assertThat(underTest.findFirstSubstringOccurence(s, x), is(0));
+		assertThat(underTest.findFirstSubstringOccurrence(s, x), is(0));
 	}
 }

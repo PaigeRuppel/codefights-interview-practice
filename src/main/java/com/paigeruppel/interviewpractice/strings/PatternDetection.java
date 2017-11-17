@@ -2,21 +2,13 @@ package com.paigeruppel.interviewpractice.strings;
 
 public class PatternDetection {
 
-	public int findFirstSubstringOccurence(String s, String x) {
-		char[] allChars = s.toCharArray();
-		int sLength = s.length();
-		char[] match = x.toCharArray();
-		int xLength = x.length();
-		for (int i = 0; i <= sLength - xLength; i++) {
-			int count = 0;
-			if (allChars[i] == match[0]) {
-				while (count < xLength) {
-					if (allChars[i + count] == match[count] && count == xLength - 1) {
-						return i;
-					} else if (allChars[i + count] != match[count]) {
-						break;
-					}
-					count++;
+	public int findFirstSubstringOccurrence(String s, String x) {
+		int sL = s.length();
+		int xL = x.length();
+		for (int i = 0; i <= sL - xL; i++) {
+			if (s.charAt(i) == x.charAt(0) && s.charAt(i + xL - 1) == x.charAt(xL - 1)) {
+				if (s.substring(i, i+xL).equals(x)) {
+					return i;
 				}
 			}
 		}
