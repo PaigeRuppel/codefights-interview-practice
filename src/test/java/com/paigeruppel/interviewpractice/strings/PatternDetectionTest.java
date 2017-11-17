@@ -29,4 +29,11 @@ public class PatternDetectionTest {
 		String x = "IsA";
 		assertThat(underTest.findFirstSubstringOccurence(s, x), is(10));
 	}
+	
+	@Test
+	public void testCase3() {
+		String s = "a";
+		String x = "a";
+		assertThat(underTest.findFirstSubstringOccurence(s, x), is(0));
+	}
 }
