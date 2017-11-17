@@ -10,7 +10,6 @@ public class CoinOrganizer {
 	public int possibleSums(int[] coins, int[] quantities) {
 		Set<Integer> sums = new HashSet<>();
 		List<Integer> availableCoins = new ArrayList<>();
-
 		for (int i = 0; i < coins.length; i++) {
 			int coin = coins[i];
 			int quantity = quantities[i];
@@ -22,11 +21,15 @@ public class CoinOrganizer {
 			} while (q <= quantity);
 		}
 
-		int increment = availableCoins.size() - 1;
+		int index = availableCoins.size();
+		buildPossibleSums(index, availableCoins, sums);
+		return sums.size();
+	}
 
+	private Set<Integer> buildPossibleSums(int index, List<Integer> availableCoins, Set<Integer> sums) {
+		int increment = index;
 		while (increment > 0) {
-
-			for (int i = 0; i < availableCoins.size() - 1; i++) {
+			for (int i = 0; i < availableCoins.size(); i++) {
 				int coin1 = availableCoins.get(i);
 				int temp = coin1;
 				for (int j = i + increment; j < availableCoins.size() && j > 0; j--) {
@@ -35,36 +38,13 @@ public class CoinOrganizer {
 					sums.add(coin1 + coin2);
 					sums.add(temp);
 				}
-				sums.add(temp);
 			}
 			increment--;
 		}
-		
-		// for (int i = 0; i < availableCoins.size() - 1; i++) {
-		// int coin1 = availableCoins.get(i);
-		// int temp = coin1;
-		// for (int j = i + 2; j < availableCoins.size(); j++) {
-		// int coin2 = availableCoins.get(j);
-		// temp += coin2;
-		// sums.add(coin1 + coin2);
-		// sums.add(temp);
-		// }
-		// sums.add(temp);
-		// }
-		//
-		// for (int i = 0; i < availableCoins.size() - 1; i++) {
-		// int coin1 = availableCoins.get(i);
-		// int temp = coin1;
-		// for (int j = i + 3; j < availableCoins.size(); j++) {
-		// int coin2 = availableCoins.get(j);
-		// temp += coin2;
-		// sums.add(coin1 + coin2);
-		// sums.add(temp);
-		// }
-		// sums.add(temp);
-		// }
-
-		return sums.size();
+		if (index != 0) {
+			index -= 1;
+			buildPossibleSums(index, availableCoins, sums);
+		}
+		return sums;
 	}
-
 }
