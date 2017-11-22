@@ -28,4 +28,11 @@ public class KthFinderTest {
 		int k = 1;
 		assertThat(underTest.kthLargestElement(nums, k), is(99));
 	}
+	
+	@Test
+	public void secondLargestElementShouldReturn0FromArrayWithNegativeNumberTestCase5() {
+		int[] nums = {-1, 2, 0};
+		int k = 2;
+		assertThat(underTest.kthLargestElement(nums, k), is(0));
+	}
 }

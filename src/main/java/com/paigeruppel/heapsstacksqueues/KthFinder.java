@@ -1,20 +1,22 @@
 package com.paigeruppel.heapsstacksqueues;
 
+import java.util.PriorityQueue;
+
 public class KthFinder {
 
 	public int kthLargestElement(int[] nums, int k) {
-	    for (int i = 0; i < nums.length; i++) {
-	        for (int j = i + 1; j < nums.length; j++) {
-	            int tmp = 0;
-	            if (nums[i] < nums[j]) {
-	                tmp = nums[i];
-	                nums[i] = nums[j];
-	                nums[j] = tmp;
-	            }
-	        }
+	   PriorityQueue<Integer> pq = new PriorityQueue<>();
+		for (int i = 0; i < nums.length; i++) {
+	        pq.add(nums[i]);
 	    }
 		
-		return nums[k - 1];
+		int toRemove = pq.size() - k;
+		
+		for (int i = 0; i < toRemove; i++) {
+			pq.remove();
+		}
+		
+		return pq.peek();
 	}
 
 }
