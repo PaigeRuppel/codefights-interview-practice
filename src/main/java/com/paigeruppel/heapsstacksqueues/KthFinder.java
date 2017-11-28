@@ -9,13 +9,10 @@ public class KthFinder {
 		for (int i = 0; i < nums.length; i++) {
 	        pq.add(nums[i]);
 	    }
-		
 		int toRemove = pq.size() - k;
-		
 		for (int i = 0; i < toRemove; i++) {
 			pq.remove();
 		}
-		
 		return pq.peek();
 	}
 
