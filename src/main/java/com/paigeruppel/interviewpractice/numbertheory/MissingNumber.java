@@ -4,11 +4,13 @@ public class MissingNumber {
 
 	public int findMissingNumber(int[] arr) {
 		int n = arr.length;
-		int sum = n * (n+1) / 2;
+		int expectedSum = n * (n+1) / 2;
+		int actualSum = 0;
 		for (int num:arr) {
-			sum -= num;
+			actualSum += num;
 		}
-		return sum;
+		int missingNumber = expectedSum - actualSum;
+		return missingNumber;
 	}
 
 }
