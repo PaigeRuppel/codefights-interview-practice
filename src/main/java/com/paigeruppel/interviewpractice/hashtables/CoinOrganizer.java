@@ -12,15 +12,16 @@ public class CoinOrganizer {
 	public int possibleSums(int[] coins, int[] quantities) {
 		List<Integer> possibleCoins = buildPossibleCoinsList(coins, quantities);
 		getSums(possibleCoins, 0, 0);
-		return sums.size();
+		int possibleSums = sums.size();
+		return possibleSums;
 	}
 
-	private void getSums(List<Integer> possibleCoins, int start, int sum) {
+	private void getSums(List<Integer> possibleCoins, int start, int startingValue) {
 		if (possibleCoins.size() == start) return;
-		int combinedSum = sum + possibleCoins.get(start);
-		sums.add(combinedSum);
-		getSums(possibleCoins, start + 1, sum);
-		getSums(possibleCoins, start + 1, combinedSum);
+		int sum = startingValue + possibleCoins.get(start);
+		sums.add(sum);
+		getSums(possibleCoins, start + 1, startingValue); // do not include the current coin
+		getSums(possibleCoins, start + 1, sum);	// include the current coin
 	}
 
 	private List<Integer> buildPossibleCoinsList(int[] coins, int[] quantities) {
