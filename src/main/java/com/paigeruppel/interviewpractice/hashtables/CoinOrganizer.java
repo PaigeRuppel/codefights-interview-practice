@@ -7,41 +7,32 @@ import java.util.Set;
 
 public class CoinOrganizer {
 
-	public int possibleSums(int[] coins, int[] quantities) {
-		Set<Integer> sums = new HashSet<>();
-		List<Integer> availableCoins = new ArrayList<>();
-		for (int i = 0; i < coins.length; i++) {
-			int coin = coins[i];
-			int quantity = quantities[i];
-			int q = 1;
-			do {
-				availableCoins.add(coin);
-				sums.add(coin);
-				q++;
-			} while (q <= quantity);
-		}
+	private Set<Integer> sums = new HashSet<>();
 
-		buildPossibleSums(1, availableCoins, sums);
+	public int possibleSums(int[] coins, int[] quantities) {
+		List<Integer> possibleCoins = buildPossibleCoinsList(coins, quantities);
+		getSums(possibleCoins, 0, 0);
 		return sums.size();
 	}
 
-	private Set<Integer> buildPossibleSums(int index, List<Integer> availableCoins, Set<Integer> sums) {
-		int increment = index;
-		int max = availableCoins.size();
-		for (int i = 0; i < max; i++) {
-			int coin1 = availableCoins.get(i);
-			int temp = coin1;
-			for (int j = i + increment; j < max; j++) {
-				int coin2 = availableCoins.get(j);
-				temp += coin2;
-				sums.add(temp);
+	private void getSums(List<Integer> possibleCoins, int start, int sum) {
+		if (possibleCoins.size() == start) return;
+		int combinedSum = sum + possibleCoins.get(start);
+		sums.add(combinedSum);
+		getSums(possibleCoins, start + 1, sum);
+		getSums(possibleCoins, start + 1, combinedSum);
+	}
+
+	private List<Integer> buildPossibleCoinsList(int[] coins, int[] quantities) {
+		List<Integer> possibleCoins = new ArrayList<>();
+		for (int i = 0; i < coins.length; i++) {
+			int quantity = 1;
+			while (quantity <= quantities[i]) {
+				possibleCoins.add(coins[i]);
+				quantity++;
 			}
 		}
-		if (index < max) {
-			index += 1;
-			buildPossibleSums(index, availableCoins, sums);
-		}
-		
-		return sums;
+		return possibleCoins;
 	}
+
 }
