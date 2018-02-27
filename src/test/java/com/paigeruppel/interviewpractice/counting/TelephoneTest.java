@@ -22,4 +22,18 @@ public class TelephoneTest {
 		assertThat(underTest.pressingButtons(buttons), is(messages));
 	}
 
+	@Test
+	public void pressingButton2ShouldReturnArrayWith3Combinations() {
+		String buttons = "2";
+		String[] messages = { "a", "b", "c" };
+		assertThat(underTest.pressingButtons(buttons), is(messages));
+	}
+	
+	@Test
+	public void pressingButton3ShouldReturnArrayWith3Combinations() {
+		String buttons = "3";
+		String[] messages = { "d", "e", "f" };
+		assertThat(underTest.pressingButtons(buttons), is(messages));
+	}
+
 }
