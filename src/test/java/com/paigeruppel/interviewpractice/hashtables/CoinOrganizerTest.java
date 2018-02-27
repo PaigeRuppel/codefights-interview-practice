@@ -17,31 +17,52 @@ public class CoinOrganizerTest {
     }
 
     @Test
-    public void shouldReturn9TestCase1() {
+    public void coinsWithValueGreaterThan10ShouldReturn9TestCase1() {
         int[] coins = {10, 50, 100};
         int[] quantities = {1, 2, 1};
         assertThat(underTest.possibleSums(coins, quantities), is(9));
     }
 
     @Test
-    public void testCase2() {
+    public void coinsWithValueGreaterThan10ShouldReturn122TestCase2() {
         int[] coins = {10, 50, 100, 500};
         int[] quantities = {5, 3, 2, 2};
         assertThat(underTest.possibleSums(coins, quantities), is(122));
     }
 
     @Test
-    public void testCase3() {
+    public void coinsWithValueLessThan10ShouldReturnQuantity5TestCase3() {
         int[] coins = {1};
         int[] quantities = {5};
         assertThat(underTest.possibleSums(coins, quantities), is(5));
     }
 
     @Test
-    public void testCase4() {
+    public void coinsWithValueLessThan10ShouldReturnQuantity5TestCase4() {
         int coins[] = {1, 1};
         int quantities[] = {2, 3};
         assertThat(underTest.possibleSums(coins, quantities), is(5));
+    }
+
+    @Test
+    public void coinsWithValueLessThan10ShouldReturnQuantityProduct50004TestCase5() {
+        int[] coins = {1, 2};
+        int[] quantities = {50000, 2};
+        assertThat(underTest.possibleSums(coins, quantities), is(50004));
+    }
+
+    @Test
+    public void coinsWithValueLessThan10ShouldReturnQuantityProduct30008TestCase6() {
+        int[] coins = {1, 2, 3};
+        int[] quantities = {2, 3, 10000};
+        assertThat(underTest.possibleSums(coins, quantities), is(30008));
+    }
+
+    @Test
+    public void coinsWithValueLessThan10ShouldReturnQuantityProduct521TestCase7() {
+        int[] coins = {3, 1, 1};
+        int[] quantity = {111, 84, 104};
+        assertThat(underTest.possibleSums(coins, quantity), is(521));
     }
 
 }
