@@ -12,51 +12,24 @@ public class CoinOrganizer {
     When adding a new coin, you only need to consider the results you get from adding coins
     to a previous possible result.*/
 
-    public int possibleSums(int[] coins, int[] quantities) {
-        Set<Integer> sums = new HashSet<>();
-        for (int coin : coins) {
-            if (coin >= 5) {
-                sums = getAllSums(coins, quantities);
-            }
-        }
-        int possibleSums = sums.size();
-        if (possibleSums == 0) {
-            for (int i = 0; i < coins.length; i++) {
-                possibleSums += (coins[i] * quantities[i]);
-            }
-        }
-        return possibleSums;
-    }
+    public int possibleSums(int[] coins, int[] quantity) {
+        HashSet<Integer> uniqueSums = new HashSet<Integer>();
+        uniqueSums.add(0); // start with 0 so that the initial set has a value
 
-    private Set<Integer> getAllSums(int[] coins, int[] quantities) {
-        Set<Integer> sums = new HashSet<>();
-        List<Integer> allCoins = buildPossibleCoinsList(coins, quantities);
-        sums.add(allCoins.get(0));
-        for (int i = 1; i < allCoins.size(); i++) {
-            Set<Integer> tempSums = new HashSet<>();
-            for (int sum : sums) {
-                int tempSum = sum + allCoins.get(i);
-                tempSums.add(tempSum);
+        for(int i=0; i < coins.length; i++) {
+            int coin = coins[i];
+            HashSet<Integer> currentSums = new HashSet<Integer>();
+            for(Integer sum : uniqueSums) {
+                for(int j = 1; j <= quantity[i]; j++) {
+                    currentSums.add(sum + coin*j);
+                }
             }
-            for (int newSum : tempSums) {
-                sums.add(newSum);
-            }
-            sums.add(allCoins.get(i));
+            uniqueSums.addAll(currentSums);
         }
-        return sums;
-    }
 
-
-    private List<Integer> buildPossibleCoinsList(int[] coins, int[] quantities) {
-        List<Integer> possibleCoins = new ArrayList<>();
-        for (int i = 0; i < coins.length; i++) {
-            int quantity = 1;
-            while (quantity <= quantities[i]) {
-                possibleCoins.add(coins[i]);
-                quantity++;
-            }
-        }
-        return possibleCoins;
+        uniqueSums.remove(0); // remove the 0 used to initialize the set
+        int numberUniqueSums = uniqueSums.size();
+        return numberUniqueSums;
     }
 
 }
