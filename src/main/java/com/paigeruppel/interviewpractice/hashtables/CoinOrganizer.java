@@ -7,34 +7,45 @@ import java.util.Set;
 
 public class CoinOrganizer {
 
+    /* Make the hash table's keys the possible sums (or a set containing the possible sums).
+    Start empty, and add new coins to it.
+    When adding a new coin, you only need to consider the results you get from adding coins
+    to a previous possible result.*/
 
     public int possibleSums(int[] coins, int[] quantities) {
         Set<Integer> sums = new HashSet<>();
-        List<Integer> possibleCoins = buildPossibleCoinsList(coins, quantities);
-        for (int coin : possibleCoins) {
-            if (coin >= 10) {
-                getSums(sums, possibleCoins, 0, 0);
-                break;
+        for (int coin : coins) {
+            if (coin >= 5) {
+                sums = getAllSums(coins, quantities);
             }
         }
-        int possibleSums = 0;
-        if (sums.size() == 0) {
-           for (int i = 0; i < coins.length; i++) {
-               possibleSums += (coins[i] * quantities[i]);
-           }
-        } else {
-            possibleSums = sums.size();
+        int possibleSums = sums.size();
+        if (possibleSums == 0) {
+            for (int i = 0; i < coins.length; i++) {
+                possibleSums += (coins[i] * quantities[i]);
+            }
         }
         return possibleSums;
     }
 
-    private void getSums(Set<Integer> sums, List<Integer> possibleCoins, int start, int startingValue) {
-        if (possibleCoins.size() == start) return;
-        int sum = startingValue + possibleCoins.get(start);
-        sums.add(sum);
-        getSums(sums, possibleCoins, start + 1, startingValue); // do not include the current coin
-        getSums(sums, possibleCoins, start + 1, sum);    // include the current coin
+    private Set<Integer> getAllSums(int[] coins, int[] quantities) {
+        Set<Integer> sums = new HashSet<>();
+        List<Integer> allCoins = buildPossibleCoinsList(coins, quantities);
+        sums.add(allCoins.get(0));
+        for (int i = 1; i < allCoins.size(); i++) {
+            Set<Integer> tempSums = new HashSet<>();
+            for (int sum : sums) {
+                int tempSum = sum + allCoins.get(i);
+                tempSums.add(tempSum);
+            }
+            for (int newSum : tempSums) {
+                sums.add(newSum);
+            }
+            sums.add(allCoins.get(i));
+        }
+        return sums;
     }
+
 
     private List<Integer> buildPossibleCoinsList(int[] coins, int[] quantities) {
         List<Integer> possibleCoins = new ArrayList<>();

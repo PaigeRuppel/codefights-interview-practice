@@ -18,7 +18,7 @@ public class CoinOrganizerTest {
 
     @Test
     public void coinsWithValueGreaterThan10ShouldReturn9TestCase1() {
-        int[] coins = {10, 50, 100};
+        int[] coins = {10, 50, 100}; // 5 5 25 25 25 25 25 25
         int[] quantities = {1, 2, 1};
         assertThat(underTest.possibleSums(coins, quantities), is(9));
     }
@@ -63,6 +63,21 @@ public class CoinOrganizerTest {
         int[] coins = {3, 1, 1};
         int[] quantity = {111, 84, 104};
         assertThat(underTest.possibleSums(coins, quantity), is(521));
+    }
+
+    @Test
+    public void testCase8() {
+        int[] coins = {1, 1, 1, 1, 1};
+        int[] quantities = {9, 19, 18, 12, 19};
+        assertThat(underTest.possibleSums(coins, quantities), is(77));
+    }
+
+
+    @Test
+    public void testCase9() {
+        int[] coins = {3, 2, 5, 2, 3, 5, 4};
+        int[] quantities = {4, 6, 4, 9, 6, 8, 8};
+        assertThat(underTest.possibleSums(coins, quantities), is(150));
     }
 
 }
