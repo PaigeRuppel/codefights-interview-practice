@@ -27,4 +27,10 @@ public class NonAdjacentMaximizerTest {
         assertThat(underTest.houseRobber(nums), is(0));
     }
 
+    @Test
+    public void arrayWithOnlyAZeroShouldReturn0() {
+        int[] nums = {0};
+        assertThat(underTest.houseRobber(nums), is(0));
+    }
+
 }
