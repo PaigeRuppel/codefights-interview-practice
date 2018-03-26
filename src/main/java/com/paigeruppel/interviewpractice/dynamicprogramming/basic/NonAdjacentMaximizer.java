@@ -2,12 +2,14 @@ package com.paigeruppel.interviewpractice.dynamicprogramming.basic;
 
 public class NonAdjacentMaximizer {
     public int houseRobber(int[] nums) {
-        if (nums.length == 0) {
-            return 0;
+        int oddSum = 0, evenSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i == 0 || i % 2 == 0) {
+                oddSum += nums[i];
+            } else {
+                evenSum += nums[i];
+            }
         }
-        if (nums.length == 1) {
-            return nums[0];
-        }
-        return 2;
+        return (oddSum >= evenSum) ? oddSum : evenSum;
     }
 }

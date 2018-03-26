@@ -33,4 +33,16 @@ public class NonAdjacentMaximizerTest {
         assertThat(underTest.houseRobber(nums), is(0));
     }
 
+    @Test
+    public void arrayWithOnlyAOneShouldReturn1() {
+        int[] nums = {1};
+        assertThat(underTest.houseRobber(nums), is(1));
+    }
+
+    @Test
+    public void arrayWithTwoZeroesShouldReturn0() {
+        int[] nums = {0,0};
+        assertThat(underTest.houseRobber(nums), is(0));
+    }
+
 }
