@@ -12,4 +12,5 @@ public class NonAdjacentMaximizer {
         }
         return (oddSum >= evenSum) ? oddSum : evenSum;
     }
+
 }
