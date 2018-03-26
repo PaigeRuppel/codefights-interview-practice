@@ -7,6 +7,9 @@ import javax.xml.soap.Node;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 public class ListRemovalTest {
 
 	private ListRemoval underTest;
@@ -18,7 +21,9 @@ public class ListRemovalTest {
 	
 	@Test
 	public void testCase1() {
-		ListNode<ListNode> l = new ListNode(1);
-		l.next = new ListNode(2);
+		int[] arrayL = {3, 1, 2, 3, 4, 5};
+		ListNode<Integer> l = new ListNode(arrayL);
+		int[] arrayWithoutK = {1,2,4,5};
+		assertThat(underTest.removeKFromList(l, 3), is(l));
 	}
 }
